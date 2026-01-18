@@ -1,6 +1,6 @@
 {
   "manifest_version": 3,
-  "name": "Local LLM Translator",
+  "name": "Ollama Translator",
   "description": "Translate web pages using local Ollama LLM (translategemma)",
   "version": "1.0",
   "permissions": [
