@@ -24,43 +24,50 @@
       ctx.fillRect(0, 0, size, size);
 
       // 丸みを帯びた境界
-      ctx.fillStyle = 'rgba(255, 255, 255, 0.2)';
+      ctx.strokeStyle = 'rgba(255, 255, 255, 0.2)';
       ctx.beginPath();
       ctx.arc(size / 2, size / 2, size / 2 - 2, 0, Math.PI * 2);
       ctx.stroke();
 
-      // テキスト (翻訳を表す「A→あ」)
+      // テキスト (翻訳を表す「T」)
       ctx.fillStyle = 'white';
-      ctx.font = `bold ${size * 0.25}px Arial`;
+      ctx.font = `bold ${size * 0.6}px Arial`;
       ctx.textAlign = 'center';
       ctx.textBaseline = 'middle';
-
       if (size >= 48) {
         ctx.fillText('A→あ', size / 2, size / 2);
       } else {
-        ctx.fillText('翻', size / 2, size / 2);
+        ctx.fillText('T', size / 2, size / 2);
       }
+
 
       return canvas;
     }
 
     function downloadCanvas(canvas, filename) {
-      canvas.toBlob((blob) => {
-        const url = URL.createObjectURL(blob);
-        const a = document.createElement('a');
-        a.href = url;
-        a.download = filename;
-        a.click();
-        URL.revokeObjectURL(url);
+      return new Promise(resolve => {
+        canvas.toBlob((blob) => {
+          const url = URL.createObjectURL(blob);
+          const a = document.createElement('a');
+          a.href = url;
+          a.download = filename;
+          document.body.appendChild(a);
+          a.click();
+          document.body.removeChild(a);
+          URL.revokeObjectURL(url);
+          resolve();
+        });
       });
     }
 
-    function createIcons() {
+    async function createIcons() {
       const sizes = [16, 48, 128];
-      sizes.forEach(size => {
+      for (const size of sizes) {
         const canvas = createIcon(size);
-        downloadCanvas(canvas, `icon${size}.png`);
-      });
+        await downloadCanvas(canvas, `icon${size}.png`);
+        // Add a small delay between downloads to be safe
+        await new Promise(resolve => setTimeout(resolve, 100));
+      }
       alert('3つのアイコンファイル（icon16.png, icon48.png, icon128.png）がダウンロードされました。\nこれらのファイルを拡張機能のフォルダに配置してください。');
     }
   </script>
