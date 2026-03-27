@@ -1,0 +1,15 @@
+{
+  "name": "ollama-translator",
+  "version": "1.0.0",
+  "description": "Translate web pages using local Ollama LLM (translategemma)",
+  "scripts": {
+    "build": "tsc && cp manifest.json dist/ && cp *.png dist/ && cp *.html dist/",
+    "dev": "tsc --watch",
+    "clean": "rm -rf dist"
+  },
+  "devDependencies": {
+    "@types/chrome": "^0.0.268",
+    "typescript": "^5.4.0"
+  },
+  "packageManager": "pnpm@9.0.0"
+}
