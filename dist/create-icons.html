@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>Create Icons</title>
+</head>
+<body>
+  <h2>アイコン生成ツール</h2>
+  <p>このページを開いてボタンをクリックすると、アイコン画像が自動的にダウンロードされます。</p>
+  <button onclick="createIcons()">アイコンを生成</button>
+
+  <script>
+    function createIcon(size) {
+      const canvas = document.createElement('canvas');
+      canvas.width = size;
+      canvas.height = size;
+      const ctx = canvas.getContext('2d');
+
+      // 背景グラデーション
+      const gradient = ctx.createLinearGradient(0, 0, size, size);
+      gradient.addColorStop(0, '#007bff');
+      gradient.addColorStop(1, '#0056b3');
+      ctx.fillStyle = gradient;
+      ctx.fillRect(0, 0, size, size);
+
+      // 丸みを帯びた境界
+      ctx.strokeStyle = 'rgba(255, 255, 255, 0.2)';
+      ctx.beginPath();
+      ctx.arc(size / 2, size / 2, size / 2 - 2, 0, Math.PI * 2);
+      ctx.stroke();
+
+      // テキスト (翻訳を表す「T」)
+      ctx.fillStyle = 'white';
+      ctx.font = `bold ${size * 0.6}px Arial`;
+      ctx.textAlign = 'center';
+      ctx.textBaseline = 'middle';
+      if (size >= 48) {
+        ctx.fillText('A→あ', size / 2, size / 2);
+      } else {
+        ctx.fillText('T', size / 2, size / 2);
+      }
+
+
+      return canvas;
+    }
+
+    function downloadCanvas(canvas, filename) {
+      return new Promise(resolve => {
+        canvas.toBlob((blob) => {
+          const url = URL.createObjectURL(blob);
+          const a = document.createElement('a');
+          a.href = url;
+          a.download = filename;
+          document.body.appendChild(a);
+          a.click();
+          document.body.removeChild(a);
+          URL.revokeObjectURL(url);
+          resolve();
+        });
+      });
+    }
+
+    async function createIcons() {
+      const sizes = [16, 48, 128];
+      for (const size of sizes) {
+        const canvas = createIcon(size);
+        await downloadCanvas(canvas, `icon${size}.png`);
+        // Add a small delay between downloads to be safe
+        await new Promise(resolve => setTimeout(resolve, 100));
+      }
+      alert('3つのアイコンファイル（icon16.png, icon48.png, icon128.png）がダウンロードされました。\nこれらのファイルを拡張機能のフォルダに配置してください。');
+    }
+  </script>
+</body>
+</html>

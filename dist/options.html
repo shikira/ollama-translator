@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>Ollama Translator Settings</title>
+  <style>
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+      max-width: 600px;
+      margin: 40px auto;
+      padding: 20px;
+      background: #f5f5f5;
+    }
+    .container {
+      background: white;
+      padding: 30px;
+      border-radius: 8px;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+    }
+    h1 {
+      color: #333;
+      margin-top: 0;
+      font-size: 24px;
+      border-bottom: 2px solid #007bff;
+      padding-bottom: 10px;
+    }
+    .setting-group {
+      margin: 20px 0;
+    }
+    label {
+      display: block;
+      margin-bottom: 8px;
+      color: #555;
+      font-weight: 500;
+    }
+    input[type="text"],
+    select {
+      width: 100%;
+      padding: 10px;
+      border: 1px solid #ddd;
+      border-radius: 4px;
+      font-size: 14px;
+      box-sizing: border-box;
+    }
+    input[type="checkbox"] {
+      width: 18px;
+      height: 18px;
+      margin-right: 8px;
+      vertical-align: middle;
+    }
+    .checkbox-label {
+      display: flex;
+      align-items: center;
+      cursor: pointer;
+    }
+    button {
+      background: #007bff;
+      color: white;
+      border: none;
+      padding: 12px 24px;
+      border-radius: 4px;
+      cursor: pointer;
+      font-size: 14px;
+      margin-top: 20px;
+      transition: background 0.2s;
+    }
+    button:hover {
+      background: #0056b3;
+    }
+    .status-message {
+      margin-top: 15px;
+      padding: 10px;
+      border-radius: 4px;
+      display: none;
+    }
+    .status-message.success {
+      background: #d4edda;
+      color: #155724;
+      border: 1px solid #c3e6cb;
+    }
+    .help-text {
+      font-size: 12px;
+      color: #888;
+      margin-top: 5px;
+    }
+    .model-info {
+      background: #e7f3ff;
+      border-left: 4px solid #007bff;
+      padding: 15px;
+      margin: 20px 0;
+      border-radius: 4px;
+    }
+    .model-info h3 {
+      margin-top: 0;
+      color: #007bff;
+      font-size: 16px;
+    }
+    .model-info code {
+      background: #f8f9fa;
+      padding: 2px 6px;
+      border-radius: 3px;
+      font-family: 'Courier New', monospace;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>🌐 Ollama Translator Settings</h1>
+
+    <div class="model-info">
+      <h3>📋 使用前の準備</h3>
+      <p>Ollamaがインストールされており、以下のコマンドでモデルを起動している必要があります:</p>
+      <p><code>ollama run translategemma:12b</code></p>
+      <p class="help-text">※ Ollamaは http://localhost:11434 で動作している必要があります</p>
+    </div>
+
+    <form id="settingsForm">
+      <div class="setting-group">
+        <label for="ollamaEndpoint">Ollamaエンドポイント</label>
+        <input type="text" id="ollamaEndpoint" placeholder="http://localhost:11434">
+        <div class="help-text">OllamaのAPIエンドポイントURL（デフォルト: http://localhost:11434）</div>
+      </div>
+
+      <div class="setting-group">
+        <label for="model">翻訳モデル</label>
+        <input type="text" id="model" placeholder="translategemma:12b">
+        <div class="help-text">使用するOllamaモデル名を入力してください</div>
+      </div>
+
+      <div class="setting-group">
+        <label class="checkbox-label">
+          <input type="checkbox" id="autoTranslate">
+          <span>ページ読み込み時に自動翻訳を実行</span>
+        </label>
+        <div class="help-text">チェックを外すと手動翻訳のみになります</div>
+      </div>
+
+      <div class="setting-group">
+        <label for="targetLanguage">翻訳先の言語</label>
+        <select id="targetLanguage">
+          <option value="ja">日本語 (Japanese)</option>
+          <option value="en">英語 (English)</option>
+          <option value="zh">中国語 (Chinese)</option>
+          <option value="ko">韓国語 (Korean)</option>
+        </select>
+      </div>
+
+      <div class="setting-group">
+        <label for="excludeDomains">翻訳を除外するドメイン（カンマ区切り）</label>
+        <input type="text" id="excludeDomains" placeholder="例: example.com, test.com">
+        <div class="help-text">これらのドメインでは自動翻訳が実行されません</div>
+      </div>
+
+      <button type="submit">💾 設定を保存</button>
+    </form>
+
+    <div id="statusMessage" class="status-message"></div>
+  </div>
+
+  <script src="options.js"></script>
+</body>
+</html>
