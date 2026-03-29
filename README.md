@@ -35,6 +35,12 @@ ollama pull translategemma:12b  # Balanced (8.1GB)
 ollama pull translategemma:27b  # High quality (17GB)
 ```
 
+## ✅ Tested LLM Models
+
+| Model | Status | Performance | Notes |
+|-------|--------|-------------|-------|
+| [translategemma](https://ollama.com/library/translategemma) | ✅ Confirmed | Excellent | Recommended - Specialized for translation |
+
 ### 3. Start Ollama (Important)
 
 **To access Ollama from the Chrome extension, CORS configuration is required.**
