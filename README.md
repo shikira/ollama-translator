@@ -13,6 +13,13 @@ A Chrome extension that translates web pages using locally-running Ollama LLM (t
 - **⚙️ Customizable**: Configure model and target language settings
 - **🔒 Privacy Protection**: All processing is local (no external APIs used)
 
+## 🌐 Supported Browsers
+
+| Browser | Status | Version | Notes |
+|---------|--------|---------|-------|
+| Chrome | ✅ Confirmed | Latest | Full compatibility |
+| Orion | ✅ Confirmed | Latest | WebKit-based browser |
+
 ## 📋 Prerequisites
 
 ### 1. Install Ollama
