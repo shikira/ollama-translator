@@ -1,17 +1,30 @@
 # 🌐 Ollama Translator - Local LLM Translation Chrome Extension
 
-A Chrome extension that translates web pages using locally-running Ollama LLM (translategemma:latest).
+A Chrome extension that translates web pages using locally-running Ollama LLM models.
 
 ## ✨ Features
 
 - **🌍 Page Translation Toggle**: Turn page-wide translation ON/OFF with one click from the popup
-- **📝 Selection Translation**: Translate selected text
-- **🎯 Priority Translation**: Translates in order: Visible main content → Hidden main content → Navigation
-- **🔄 Original/Translation Toggle**: Switch between original and translated text with one click even during translation
-- **⚡ Parallel Processing**: Execute up to 5 translation requests in parallel (server load optimized)
-- **🖱️ Context Menu**: Execute translations from right-click menu
-- **⚙️ Customizable**: Configure model and target language settings
-- **🔒 Privacy Protection**: All processing is local (no external APIs used)
+- **📝 Selection Translation**: Translate selected text instantly
+- **🎯 Smart Translation**: Prioritizes visible main content for better user experience
+- **🔄 Original/Translation Toggle**: Switch between original and translated text seamlessly
+- **⚡ Parallel Processing**: Optimized batch processing for faster translation
+- **🖱️ Context Menu**: Right-click to translate selected text or entire page
+- **⚙️ Customizable Settings**: Configure Ollama endpoint, model, and target language
+- **🔒 Privacy First**: All processing is local - no data sent to external services
+
+## 🌐 Supported Browsers
+
+| Browser | Status | Version | Notes |
+|---------|--------|---------|-------|
+| Chrome | ✅ Confirmed | Latest | Full compatibility |
+| Orion | ✅ Confirmed | Latest | WebKit-based browser |
+
+## ✅ Tested LLM Models
+
+| Model | Status | Performance | Notes |
+|-------|--------|-------------|-------|
+| [translategemma](https://ollama.com/library/translategemma) | ✅ Confirmed | Excellent | Recommended - Specialized for translation |
 
 ## 📋 Prerequisites
 
@@ -64,27 +77,28 @@ set OLLAMA_ORIGINS=chrome-extension://* && ollama serve
 
 ## 🚀 Installation
 
-### Method 1: From Chrome Web Store (After Publication)
-*Currently unpublished. Please use Method 2.*
+### Method 1: From Chrome Web Store
+*Currently under review. Please use Method 2 for now.*
 
-### Method 2: Install in Developer Mode
+### Method 2: Developer Mode Installation
 
-1. Clone or download this repository:
+1. **Clone the repository:**
    ```bash
-   git clone https://github.com/yourusername/ollama-translator.git
+   git clone https://github.com/shikira/ollama-translator.git
    cd ollama-translator
    ```
 
-2. Generate icon images:
-   - Open `create-icons.html` in a browser
-   - Click the "Generate Icons" button
-   - Place the downloaded 3 PNG files (icon16.png, icon48.png, icon128.png) in the extension folder
+2. **Build the extension (TypeScript version):**
+   ```bash
+   pnpm install
+   pnpm run build
+   ```
 
-3. Load the extension in Chrome:
-   - Open Chrome and navigate to `chrome://extensions/`
-   - Turn ON "Developer mode" in the upper right
+3. **Load in Chrome:**
+   - Open `chrome://extensions/`
+   - Enable "Developer mode"
    - Click "Load unpacked"
-   - Select this folder
+   - Select the `dist/` folder
 
 ## 📖 Usage
 
